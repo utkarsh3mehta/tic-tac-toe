@@ -65,13 +65,28 @@ class App extends Component {
         turn: !prevState.turn,
       }
     });
+    this.checkWinner()
   }
   
   render () {
     return (
       <div className={styles.App}>
-        <img src={logo} className={styles.Logo} alt="logo" onClick={this.resetHandler}/>
+        <div className={styles.Header}>
+          <img src={logo} className={styles.Logo} alt="logo"/>
+          <div>
+            <button className={styles.AppButton} onClick={this.clearFieldHandler}>Clear Fields</button>
+            <button className={styles.AppButton} onClick={this.resetStatHandler}>Reset Stats</button>
+          </div>
+          {/* <ReactSlider
+            className="horizontal-slider"
+            renderThumb={(props, state) => <div {...props}>{state.score}</div>}
+          /> */}
         <Blocks flag={this.state.flag} blockClicked={this.blockClickHandler} />
+          {/* <div className={styles.SideRules}>
+            <p>Rules:</p>
+            <ul><li>First game is started by 'X'</li></ul>
+          </div> */}
+        </div>
       </div>
     );
   }
