@@ -3,8 +3,10 @@ import logo from '../assets/images/logo.svg';
 import styles from './App.css';
 import Blocks from '../component/Blocks/Blocks';
 
-class App extends Component {
+import ReactSlider from 'react-slider';
 
+class App extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -230,7 +232,7 @@ class App extends Component {
     });
     this.checkWinner()
   }
-  
+
   getSnapshotBeforeUpdate(prevProp, prevState) {
     if (this.state.score !== prevState.score) {
       this.clearFieldHandler()
@@ -253,7 +255,7 @@ class App extends Component {
             className="horizontal-slider"
             renderThumb={(props, state) => <div {...props}>{state.score}</div>}
           /> */}
-        <Blocks flag={this.state.flag} blockClicked={this.blockClickHandler} />
+          <Blocks flag={this.state.flag} blockClicked={this.blockClickHandler} />
           {/* <div className={styles.SideRules}>
             <p>Rules:</p>
             <ul><li>First game is started by 'X'</li></ul>
