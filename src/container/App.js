@@ -125,6 +125,64 @@ class App extends Component {
     })
   }
 
+  diagonalChecker = () => {
+    let oldFlag = {...this.state.flag}
+    let diagLeft = [], diagRight = []
+    let rowLength = Object.keys(oldFlag).length
+    let colLength
+    Object.keys(oldFlag).map(rowid => {
+      colLength =  Object.keys(oldFlag[rowid]).length
+      return null
+    })
+    for (let row = 0, col = colLength-1; row < rowLength, col >= 0; row++, col--) {
+      let rowid = 'row'+row
+      let colleftid = 'col'+row
+      let colrightid = 'col'+col
+      diagLeft = diagLeft.concat(oldFlag[rowid][colleftid])
+      diagRight = diagRight.concat(oldFlag[rowid][colrightid])
+    }
+    diagLeft = diagLeft.reduce((prev, now) => {
+      if (prev === now) {
+        return prev
+      } else {
+        return false
+      }
+    })
+    diagRight = diagRight.reduce((prev, now) => {
+      if (prev === now) {
+        return prev
+      } else {
+        return false
+      }
+    })
+    // console.log(diagLeft, diagRight)
+    if(diagLeft === 'x') {
+      this.setState(prevState => {
+        return {
+          score: prevState.score + 1
+        }
+      })
+    } else if (diagLeft === 'o') {
+      this.setState(prevState => {
+        return {
+          score: prevState.score - 1
+        }
+      })
+    }
+    if(diagRight === 'x') {
+      this.setState(prevState => {
+        return {
+          score: prevState.score + 1
+        }
+      })
+    } else if (diagRight === 'o') {
+      this.setState(prevState => {
+        return {
+          score: prevState.score - 1
+        }
+      })
+    }
+  }
   clearFieldHandler = () => {
     let oldFlag = {...this.state.flag}
     Object.keys(oldFlag).map(rowid => {
