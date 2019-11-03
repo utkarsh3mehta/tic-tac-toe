@@ -44,6 +44,13 @@ class App extends Component {
     })
   }
 
+  resetStatHandler = () => {
+    this.clearFieldHandler()
+    this.setState({
+      score: 0,
+      turn: false
+    })
+  }
   blockClickHandler = (row, col) => {
     let oldFlag = {...this.state.flag}
     if(this.state.turn) {
