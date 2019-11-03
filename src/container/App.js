@@ -184,6 +184,14 @@ class App extends Component {
       })
     }
   }
+
+  checkWinner = () => {
+    // console.log('running other functions')
+    this.rowChecker()
+    this.colChecker()
+    this.diagonalChecker()
+  }
+
   clearFieldHandler = () => {
     let oldFlag = {...this.state.flag}
     Object.keys(oldFlag).map(rowid => {
