@@ -51,12 +51,13 @@ class App extends Component {
       turn: false
     })
   }
+
   blockClickHandler = (row, col) => {
     let oldFlag = {...this.state.flag}
     if(this.state.turn) {
-      oldFlag[row][col]  = 1;
+      oldFlag[row][col]  = 'o';
     } else {
-      oldFlag[row][col] = 2;
+      oldFlag[row][col] = 'x';
     }
     this.setState(prevState => {
       return {
