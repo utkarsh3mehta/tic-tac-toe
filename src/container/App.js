@@ -29,6 +29,54 @@ class App extends Component {
     }
   }
 
+  rowChecker = () => {
+    // console.log('running rowChecker');
+    let oldFlag = {...this.state.flag}
+    let rowWinner = Object.keys(oldFlag).map(rowid => {
+      let row = Object.values(oldFlag[rowid]).reduce((val, el) => {
+        //console.log(val, el)
+        if(val !== null) {
+          if(val === el) {
+            return val;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      })
+      if(row !== false) {
+        if(row === 'x') {
+          return 'x';
+        } else if(row === 'o') {
+          return 'o';
+        } else {
+          return null
+        }
+      } else {
+        return null;
+      }
+    })
+    // console.log(rowWinner)
+    rowWinner.map(row => {
+      if (row === 'x') {
+         this.setState(prevState => {
+           return {
+             score: prevState.score + 1
+           }
+         })
+      } 
+      else if(row === 'o') {
+        this.setState(prevState => {
+          return {
+            score: prevState.score - 1
+          }
+        })
+      }
+      return null;
+    })
+  }
+
   clearFieldHandler = () => {
     let oldFlag = {...this.state.flag}
     Object.keys(oldFlag).map(rowid => {
