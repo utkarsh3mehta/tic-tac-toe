@@ -1,17 +1,41 @@
 import React from 'react';
+import styles from './Block.css';
 const Block = (props) => {
     let hiflag = null;
+    let btn = null;
     let status = false;
-    if(props.flag === 0) {
-        hiflag = 'click me';
-        status = true;
+    if(props.flag === 'x') {
+        hiflag = 'X';
     }
-    else if(props.flag === 1) {
+    else if(props.flag === 'o') {
         hiflag = 'O';
     }
     else {
-        hiflag = 'X';
+        hiflag = '';
+        status = true;
     }
-    return status ? <button onClick={() => props.clicked(props.row, props.col)} >{hiflag}</button> : <button>{hiflag}</button>
+
+    if (props.lastcol) {
+        btn = status ? <button 
+        className={styles.RightMost} 
+        onClick={() => props.clicked(props.row, props.col)}>
+            {hiflag}
+        </button> : <button 
+        className={styles.RightMost}>
+            {hiflag}
+        </button>
+    }
+    else {
+        btn = status ? <button 
+        onClick={() => props.clicked(props.row, props.col)}>
+            {hiflag}
+        </button> : <button>
+            {hiflag}
+        </button>
+    }
+
+    return <span className={styles.Block}>
+        {btn}
+    </span>
 }
 export default Block;
