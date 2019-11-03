@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      score: 0,
       turn: false,
       flag: {
         row0 : {
@@ -221,6 +222,15 @@ class App extends Component {
     });
     this.checkWinner()
   }
+  
+  getSnapshotBeforeUpdate(prevProp, prevState) {
+    if (this.state.score !== prevState.score) {
+      this.clearFieldHandler()
+    }
+    return null
+  }
+
+  componentDidUpdate(prevProp, prevState) {}
   
   render () {
     return (
