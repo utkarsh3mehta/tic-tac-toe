@@ -2,11 +2,11 @@
   text-align: center;
 }
 
-.Logo {
+.App-logo {
   height: 40vmin;
 }
 
-.Header {
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -17,22 +17,6 @@
   color: white;
 }
 
-.AppButton {
-  width: 100px;
-  height: 50px;
-  margin: 2px;
-  box-sizing: border-box;
-  background-color: #09d3ac;
-  border: transparent;
-}
-
-.Link {
+.App-link {
   color: #09d3ac;
-}
-
-.SideRules {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 20%;
 }
