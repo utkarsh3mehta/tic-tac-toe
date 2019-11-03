@@ -17,6 +17,22 @@
   color: white;
 }
 
+.AppButton {
+  width: 100px;
+  height: 50px;
+  margin: 2px;
+  box-sizing: border-box;
+  background-color: #09d3ac;
+  border: transparent;
+}
+
 .Link {
   color: #09d3ac;
+}
+
+.SideRules {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
 }
