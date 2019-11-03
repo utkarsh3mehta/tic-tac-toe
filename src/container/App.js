@@ -29,17 +29,18 @@ class App extends Component {
     }
   }
 
-  resetHandler = () => {
+  clearFieldHandler = () => {
     let oldFlag = {...this.state.flag}
-    let newFlag = Object.keys(oldFlag).map(rowid => {
+    Object.keys(oldFlag).map(rowid => {
       return Object.keys(oldFlag[rowid]).map(colid => {
-        console.log(rowid, colid);
-        return oldFlag[rowid][colid] = 0;
+        //console.log(rowid, colid);
+        oldFlag[rowid][colid] = null;
+        return oldFlag;
       })
     })
-    console.log(newFlag);
+    //console.log(newFlag);
     this.setState({
-      flag: oldFlag
+      flag: oldFlag,
     })
   }
 
