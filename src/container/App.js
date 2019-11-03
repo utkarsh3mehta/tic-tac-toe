@@ -77,6 +77,54 @@ class App extends Component {
     })
   }
 
+  colChecker = () => {
+    // console.log('running colChecker');
+    let oldFlag = {...this.state.flag}
+    let rowLength = Object.keys(oldFlag).length;
+    let colLength
+    Object.keys(oldFlag).map(rowid => {
+      colLength = Object.keys(oldFlag[rowid]).length
+      return null
+    })
+    //console.log(rowLength, colLength)
+    let colWinner = [];
+    for(let col = 0; col < colLength; col++) {
+      let colid = 'col'+col
+      let colArr = [];
+      for(let row = 0; row < rowLength; row++) {
+        let rowid = 'row'+row
+        // console.log()
+        colArr = colArr.concat(oldFlag[rowid][colid])
+      }
+      // console.log(colArr);
+      colWinner = colWinner.concat(colArr.reduce((prev, now) => {
+        if(prev === now) {
+          return prev;
+        } else {
+          return false;
+        }
+      }))
+    }
+    // console.log(colWinner)
+    colWinner.map(col => {
+      if (col === 'x') {
+        this.setState(prevState => {
+          return {
+            score: prevState.score + 1
+          }
+        })
+      } 
+      else if(col === 'o') {
+        this.setState(prevState => {
+          return {
+            score: prevState.score - 1
+          }
+        })
+      }
+      return null;
+    })
+  }
+
   clearFieldHandler = () => {
     let oldFlag = {...this.state.flag}
     Object.keys(oldFlag).map(rowid => {
