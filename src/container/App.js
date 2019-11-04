@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import logo from '../assets/images/logo.svg';
 import styles from './App.css';
 import Blocks from '../component/Blocks/Blocks';
+import { connect } from 'react-redux'
 
-import ReactSlider from 'react-slider';
+//import ReactSlider from 'react-slider';
 
 class App extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      score: 0,
       turn: false,
       flag: {
         row0 : {
@@ -30,6 +30,15 @@ class App extends Component {
         }
       }
     }
+  }
+
+  score_keeper = bool => {
+    if(bool) {
+      this.props.add()
+    } else {
+      this.props.sub()
+    }
+    return null
   }
 
   rowChecker = () => {
@@ -63,18 +72,10 @@ class App extends Component {
     // console.log(rowWinner)
     rowWinner.map(row => {
       if (row === 'x') {
-         this.setState(prevState => {
-           return {
-             score: prevState.score + 1
-           }
-         })
+         this.score_keeper(true)
       } 
       else if(row === 'o') {
-        this.setState(prevState => {
-          return {
-            score: prevState.score - 1
-          }
-        })
+        this.score_keeper(false)
       }
       return null;
     })
@@ -111,18 +112,10 @@ class App extends Component {
     // console.log(colWinner)
     colWinner.map(col => {
       if (col === 'x') {
-        this.setState(prevState => {
-          return {
-            score: prevState.score + 1
-          }
-        })
+        this.score_keeper(true)
       } 
       else if(col === 'o') {
-        this.setState(prevState => {
-          return {
-            score: prevState.score - 1
-          }
-        })
+        this.score_keeper(false)
       }
       return null;
     })
@@ -160,30 +153,14 @@ class App extends Component {
     })
     // console.log(diagLeft, diagRight)
     if(diagLeft === 'x') {
-      this.setState(prevState => {
-        return {
-          score: prevState.score + 1
-        }
-      })
+      this.score_keeper(true)
     } else if (diagLeft === 'o') {
-      this.setState(prevState => {
-        return {
-          score: prevState.score - 1
-        }
-      })
+      this.score_keeper(false)
     }
     if(diagRight === 'x') {
-      this.setState(prevState => {
-        return {
-          score: prevState.score + 1
-        }
-      })
+      this.score_keeper(true)
     } else if (diagRight === 'o') {
-      this.setState(prevState => {
-        return {
-          score: prevState.score - 1
-        }
-      })
+      this.score_keeper(false)
     }
   }
 
@@ -212,9 +189,9 @@ class App extends Component {
   resetStatHandler = () => {
     this.clearFieldHandler()
     this.setState({
-      score: 0,
       turn: false
     })
+    this.props.reset()
   }
 
   blockClickHandler = (row, col) => {
@@ -233,8 +210,8 @@ class App extends Component {
     this.checkWinner()
   }
 
-  getSnapshotBeforeUpdate(prevProp, prevState) {
-    if (this.state.score !== prevState.score) {
+  getSnapshotBeforeUpdate(prevProp) {
+    if (this.props.score !== prevProp.score) {
       this.clearFieldHandler()
     }
     return null
@@ -247,6 +224,7 @@ class App extends Component {
       <div className={styles.App}>
         <div className={styles.Header}>
           <img src={logo} className={styles.Logo} alt="logo"/>
+          {this.props.score}
           <div>
             <button className={styles.AppButton} onClick={this.clearFieldHandler}>Clear Fields</button>
             <button className={styles.AppButton} onClick={this.resetStatHandler}>Reset Stats</button>
@@ -266,4 +244,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    score: state.score,
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    add: () => dispatch({type: 'ADD'}),
+    sub: () => dispatch({type: 'SUB'}),
+    reset: () => dispatch({type: 'RESET'})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
