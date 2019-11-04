@@ -208,6 +208,32 @@ class App extends Component {
       }
     });
     this.checkWinner()
+    // clear blocks when all are full
+    let clear_blocks = false
+    clear_blocks = Object.keys(this.state.flag).map(rowid => {
+      return Object.values(this.state.flag[rowid]).map(colval => {
+        if(colval !== null) {
+          return true
+        } else {
+          return false
+        }
+      }).reduce((val, el) => {
+        if(val&&el) {
+          return true
+        } else {
+          return false
+        }
+      })
+    }).reduce((val, el) => {
+      if(val&&el) {
+        return true
+      } else {
+        return false
+      }
+    })
+    if(clear_blocks) {
+      this.clearFieldHandler()
+    }
   }
 
   getSnapshotBeforeUpdate(prevProp) {
