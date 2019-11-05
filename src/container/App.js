@@ -3,8 +3,7 @@ import logo from '../assets/images/logo.svg';
 import styles from './App.css';
 import Blocks from '../component/Blocks/Blocks';
 import { connect } from 'react-redux'
-
-//import ReactSlider from 'react-slider';
+import Slider from '../component/Slider/Slider';
 
 class App extends Component {
   
@@ -33,10 +32,15 @@ class App extends Component {
   }
 
   score_keeper = bool => {
-    if(bool) {
-      this.props.add()
+    // console.log(this.props.score)
+    if(this.props.score < 6 && this.props.score > -6) {
+      if(bool) {
+        this.props.add()
+      } else {
+        this.props.sub()
+      }
     } else {
-      this.props.sub()
+      this.props.reset()
     }
     return null
   }
@@ -240,6 +244,7 @@ class App extends Component {
     if (this.props.score !== prevProp.score) {
       this.clearFieldHandler()
     }
+    // console.log("GetSnapshotBeforeUpdate"+this.props.score)
     return null
   }
 
@@ -250,15 +255,11 @@ class App extends Component {
       <div className={styles.App}>
         <div className={styles.Header}>
           <img src={logo} className={styles.Logo} alt="logo"/>
-          {this.props.score}
+          <Slider score={this.props.score} />
           <div>
             <button className={styles.AppButton} onClick={this.clearFieldHandler}>Clear Fields</button>
             <button className={styles.AppButton} onClick={this.resetStatHandler}>Reset Stats</button>
           </div>
-          {/* <ReactSlider
-            className="horizontal-slider"
-            renderThumb={(props, state) => <div {...props}>{state.score}</div>}
-          /> */}
           <Blocks flag={this.state.flag} blockClicked={this.blockClickHandler} />
           {/* <div className={styles.SideRules}>
             <p>Rules:</p>
