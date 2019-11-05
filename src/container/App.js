@@ -14,19 +14,19 @@ class App extends Component {
       turn: false,
       flag: {
         row0 : {
-          col0: 'x',
+          col0: null,
           col1: null,
-          col2: 'o',
+          col2: null,
         },
         row1: {
-          col0: 'o',
-          col1: 'x',
+          col0: null,
+          col1: null,
           col2: null,
         },
         row2: {
-          col0: 'x',
-          col1: 'o',
-          col2: 'x',
+          col0: null,
+          col1: null,
+          col2: null,
         }
       }
     }
