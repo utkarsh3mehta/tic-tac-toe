@@ -1,15 +1,13 @@
-import store from "./store"
-
-const add = 'ADD'
-const sub = 'SUB'
+const addx = 'ADD_X'
+const addo = 'ADD_O'
 const reset = 'RESET'
 
-export const add_score = () => ({
-    type: add
+export const add_x_score = () => ({
+    type: addx
 })
 
-export const sub_score = () => ({
-    type: sub
+export const add_o_score = () => ({
+    type: addo
 })
 
 export const reset_score = () => ({
