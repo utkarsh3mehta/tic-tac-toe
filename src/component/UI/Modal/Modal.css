@@ -1,0 +1,47 @@
+.backdrop {
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    position: fixed;
+    background-color: white;
+    width: 45%;
+    height: 30%;
+    z-index: 200;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 30%;
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3 ease-out;
+}
+
+@media (min-width: 600px) {
+    .modal {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}
+
+.modal strong {
+    font-size: 4rem;
+}
+
+.modal button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.1em;
+}
+
+.modal button.success {
+    color: green
+}
+
+.modal button.danger {
+    color: red
+}

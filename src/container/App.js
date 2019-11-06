@@ -253,6 +253,9 @@ class App extends Component {
   render () {
     return (
       <div className={styles.App}>
+        {this.state.winner !== null ? <Modal 
+        winner={this.state.winner} 
+        playAgain={()=>this.resetStatHandler()}/> : null}
         <div className={styles.Header}>
           <img src={logo} className={styles.Logo} alt="logo"/>
           <small>Max score: 5</small>
