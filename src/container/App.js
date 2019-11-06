@@ -3,7 +3,8 @@ import logo from '../assets/images/logo.svg';
 import styles from './App.css';
 import Blocks from '../component/Blocks/Blocks';
 import { connect } from 'react-redux'
-import Slider from '../component/Slider/Slider';
+import ScoreKeeper from '../component/ScoreKeeper/ScoreKeeper';
+import Modal from '../component/UI/Modal/Modal';
 
 class App extends Component {
   
@@ -11,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       turn: false,
+      winner: null,
       flag: {
         row0 : {
           col0: null,
@@ -33,14 +35,26 @@ class App extends Component {
 
   score_keeper = bool => {
     // console.log(this.props.score)
-    if(this.props.score < 6 && this.props.score > -6) {
-      if(bool) {
-        this.props.add()
+    if(bool) {
+      if(this.props.scoreX < 4) {
+        this.props.addx()
+        this.clearFieldHandler()
       } else {
-        this.props.sub()
+        // console.log('in else block')
+        this.setState({
+          winner: 'x',
+        })
       }
     } else {
-      this.props.reset()
+      if(this.props.scoreO < 4) {
+        this.props.addo()
+        this.clearFieldHandler()
+      } else {
+        // console.log('in else block')
+        this.setState({
+          winner: 'o',
+        })
+      }
     }
     return null
   }
@@ -187,13 +201,15 @@ class App extends Component {
     //console.log(newFlag);
     this.setState({
       flag: oldFlag,
+      winner: null,
     })
   }
 
   resetStatHandler = () => {
     this.clearFieldHandler()
     this.setState({
-      turn: false
+      turn: false,
+      winner: null,
     })
     this.props.reset()
   }
@@ -240,16 +256,6 @@ class App extends Component {
     }
   }
 
-  getSnapshotBeforeUpdate(prevProp) {
-    if (this.props.score !== prevProp.score) {
-      this.clearFieldHandler()
-    }
-    // console.log("GetSnapshotBeforeUpdate"+this.props.score)
-    return null
-  }
-
-  componentDidUpdate(prevProp, prevState) {}
-  
   render () {
     return (
       <div className={styles.App}>
@@ -279,14 +285,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    score: state.score,
+    scoreX: state.scoreX,
+    scoreO: state.scoreO
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: () => dispatch({type: 'ADD'}),
-    sub: () => dispatch({type: 'SUB'}),
+    addx: () => dispatch({type: 'ADD_X'}),
+    addo: () => dispatch({type: 'ADD_O'}),
     reset: () => dispatch({type: 'RESET'})
   }
 }
