@@ -1,0 +1,5 @@
+.ScoreKeeper {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.9em;
+}

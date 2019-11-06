@@ -255,7 +255,10 @@ class App extends Component {
       <div className={styles.App}>
         <div className={styles.Header}>
           <img src={logo} className={styles.Logo} alt="logo"/>
-          <Slider score={this.props.score} />
+          <small>Max score: 5</small>
+          <div className={styles.ScoreKeeper} >
+            <ScoreKeeper score={this.props.scoreX} player="X" />&nbsp;v/s&nbsp;<ScoreKeeper score={this.props.scoreO} player="O" />
+          </div>
           <div>
             <button className={styles.AppButton} onClick={this.clearFieldHandler}>Clear Fields</button>
             <button className={styles.AppButton} onClick={this.resetStatHandler}>Reset Stats</button>
