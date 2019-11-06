@@ -3,7 +3,7 @@
 }
 
 .Logo {
-  height: 40vmin;
+  height: 10vmin;
 }
 
 .Header {
@@ -29,3 +29,27 @@
 .Link {
   color: #09d3ac;
 }
+
+.ScoreKeeper {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-items: center;
+}
+
+/* 
+.SliderDiv {
+  flex-direction: row;
+}
+
+.Slider {
+  background-color: #09d3ac;
+} */
+
+/* .SideRules {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+} */
