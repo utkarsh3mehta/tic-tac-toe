@@ -5,7 +5,6 @@ import Blocks from '../component/Blocks/Blocks';
 import { connect } from 'react-redux'
 import ScoreKeeper from '../component/ScoreKeeper/ScoreKeeper';
 import Modal from '../component/UI/Modal/Modal';
-import Maxscore from '../component/MaxScore/MaxScore';
 
 class App extends Component {
   
@@ -14,7 +13,6 @@ class App extends Component {
     this.state = {
       turn: false,
       winner: null,
-      max: 5,
       flag: {
         row0 : {
           col0: null,
@@ -58,14 +56,6 @@ class App extends Component {
         })
       }
     }
-    return null
-  }
-
-  maxscorehandler = (event) => {
-    this.setState({
-      max: event.target.value,
-    })
-    //console.log(this.state.max)
     return null
   }
 
@@ -274,7 +264,6 @@ class App extends Component {
         playAgain={()=>this.resetStatHandler()}/> : null}
         <div className={styles.Header}>
           <img src={logo} className={styles.Logo} alt="logo"/>
-          <Maxscore  changed={this.maxscorehandler} max={this.state.max} />
           <div className={styles.ScoreKeeper} >
             <ScoreKeeper score={this.props.scoreX} player="X" />&nbsp;v/s&nbsp;<ScoreKeeper score={this.props.scoreO} player="O" />
           </div>
